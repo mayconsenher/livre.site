@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Achadinhos Mercado Livre | Ofertas e Promoções</title>
+  <meta
+    name="description"
+    content="Encontre produtos selecionados, ofertas e promoções nos Achadinhos Mercado Livre."
+  >
+
+  <style>
+    :root {
+      --amarelo: #ffe600;
+      --azul: #3483fa;
+      --azul-escuro: #1f63bd;
+      --texto: #262626;
+      --cinza: #666;
+      --fundo: #f5f5f5;
+      --branco: #fff;
+      --verde: #00a650;
+      --sombra: 0 4px 18px rgba(0, 0, 0, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: var(--fundo);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--amarelo);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .cabecalho {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--azul-escuro);
+    }
+
+    .busca {
+      display: flex;
+      background: var(--branco);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .busca input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 0;
+      outline: 0;
+    }
+
+    .busca button {
+      padding: 0 20px;
+      border: 0;
+      color: var(--branco);
+      background: var(--azul);
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 70px 0;
+      background:
+        radial-gradient(circle at 85% 30%, #fff9a7 0, transparent 30%),
+        linear-gradient(135deg, #ffe600, #fff4a3);
+    }
+
+    .hero-conteudo {
+      max-width: 680px;
+    }
+
+    .hero h1 {
+      margin-bottom: 18px;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin-bottom: 28px;
+      color: #494100;
+      font-size: 1.15rem;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--branco);
+      background: var(--azul);
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .botao:hover {
+      background: var(--azul-escuro);
+      transform: translateY(-2px);
+    }
+
+    main {
+      padding: 55px 0;
+    }
+
+    .titulo-secao {
+      margin-bottom: 26px;
+      font-size: 1.8rem;
+    }
+
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 55px;
+    }
+
+    .categoria {
+      padding: 24px 14px;
+      border-radius: 12px;
+      background: var(--branco);
+      text-align: center;
+      box-shadow: var(--sombra);
+      transition: 0.2s;
+    }
+
+    .categoria:hover {
+      color: var(--azul);
+      transform: translateY(-4px);
+    }
+
+    .categoria .icone {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 2rem;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .produto {
+      display: flex;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--branco);
+      box-shadow: var(--sombra);
+      flex-direction: column;
+      transition: 0.25s;
+    }
+
+    .produto:hover {
+      transform: translateY(-6px);
+    }
+
+    .produto-imagem {
+      display: grid;
+      min-height: 210px;
+      padding: 24px;
+      place-items: center;
+      background: linear-gradient(135deg, #fafafa, #e7e7e7);
+      font-size: 4.5rem;
+    }
+
+    .produto-conteudo {
+      display: flex;
+      height: 100%;
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    .etiqueta {
+      align-self: flex-start;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      color: var(--branco);
+      background: var(--verde);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .produto h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .preco-antigo {
+      color: #999;
+      font-size: 0.85rem;
+      text-decoration: line-through;
+    }
+
+    .preco {
+      margin-bottom: 3px;
+      font-size: 1.65rem;
+    }
+
+    .parcelamento,
+    .frete {
+      color: var(--verde);
+      font-size: 0.9rem;
+    }
+
+    .produto .botao {
+      width: 100%;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .aviso {
+      margin-top: 45px;
+      padding: 18px;
+      border-left: 4px solid var(--amarelo);
+      background: var(--branco);
+      color: var(--cinza);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: 35px 0;
+      color: #ddd;
+      background: #222;
+      text-align: center;
+    }
+
+    footer p + p {
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+
+    .vazio {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 35px;
+      border-radius: 10px;
+      background: var(--branco);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .cabecalho {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .categorias,
+      .produtos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        position: static;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        padding: 48px 0;
+      }
+
+      .categorias,
+      .produtos {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container cabecalho">
+      <a class="logo" href="#">Achadinhos<span>Mercado.Livre</span></a>
+
+      <form class="busca" id="formBusca">
+        <input
+          id="campoBusca"
+          type="search"
+          placeholder="Buscar produtos..."
+          aria-label="Buscar produtos"
+        >
+        <button type="submit">Buscar</button>
+      </form>
+
+      <nav aria-label="Navegação principal">
+        <a href="#categorias">Categorias</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-conteudo">
+      <h1>Os melhores achadinhos em um só lugar</h1>
+      <p>
+        Selecionamos ofertas, promoções e produtos com ótimo custo-benefício
+        para facilitar suas compras.
+      </p>
+      <a class="botao" href="#ofertas">Ver ofertas</a>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="categorias">
+      <h2 class="titulo-secao">Categorias</h2>
+
+      <div class="categorias">
+        <a class="categoria" href="#ofertas">
+          <span class="icone">📱</span>
+          Eletrônicos
+        </a>
+
+        <a class="categoria" href="#ofertas">
+          <span class="icone">🏠</span>
+          Casa
+        </a>
+
+        <a class="categoria" href="#ofertas">
+          <span class="icone">👕</span>
+          Moda
+        </a>
+
+        <a class="categoria" href="#ofertas">
+          <span class="icone">💄</span>
+          Beleza
+        </a>
+      </div>
+    </section>
+
+    <section id="ofertas">
+      <h2 class="titulo-secao">Ofertas em destaque</h2>
+
+      <div class="produtos" id="listaProdutos">
+        <article class="produto" data-nome="fone de ouvido bluetooth eletrônico">
+          <div class="produto-imagem">🎧</div>
+          <div class="produto-conteudo">
+            <span class="etiqueta">25% OFF</span>
+            <h3>Fone de ouvido Bluetooth</h3>
+            <span class="preco-antigo">R$ 159,90</span>
+            <strong class="preco">R$ 119,90</strong>
+            <span class="parcelamento">12x de R$ 9,99</span>
+            <span class="frete">Frete grátis</span>
+            <a class="botao" href="#" target="_blank" rel="noopener">
+              Ver produto
+            </a>
+          </div>
+        </article>
+
+        <article class="produto" data-nome="smartwatch relógio inteligente eletrônico">
+          <div class="produto-imagem">⌚</div>
+          <div class="produto-conteudo">
+            <span class="etiqueta">32% OFF</span>
+            <h3>Smartwatch esportivo</h3>
+            <span class="preco-antigo">R$ 289,90</span>
+            <strong class="preco">R$ 196,90</strong>
+            <span class="parcelamento">12x de R$ 16,41</span>
+            <span class="frete">Frete grátis</span>
+            <a class="botao" href="#" target="_blank" rel="noopener">
+              Ver produto
+            </a>
+          </div>
+        </article>
+
+        <article class="produto" data-nome="cafeteira elétrica casa cozinha">
+          <div class="produto-imagem">☕</div>
+          <div class="produto-conteudo">
+            <span class="etiqueta">18% OFF</span>
+            <h3>Cafeteira elétrica compacta</h3>
+            <span class="preco-antigo">R$ 219,90</span>
+            <strong class="preco">R$ 179,90</strong>
+            <span class="parcelamento">10x de R$ 17,99</span>
+            <span class="frete">Envio rápido</span>
+            <a class="botao" href="#" target="_blank" rel="noopener">
+              Ver produto
+            </a>
+          </div>
+        </article>
+
+        <article class="produto" data-nome="kit organizador casa cozinha">
+          <div class="produto-imagem">📦</div>
+          <div class="produto-conteudo">
+            <span class="etiqueta">20% OFF</span>
+            <h3>Kit organizador multiuso</h3>
+            <span class="preco-antigo">R$ 99,90</span>
+            <strong class="preco">R$ 79,90</strong>
+            <span class="parcelamento">4x de R$ 19,98</span>
+            <span class="frete">Frete grátis</span>
+            <a class="botao" href="#" target="_blank" rel="noopener">
+              Ver produto
+            </a>
+          </div>
+        </article>
+
+        <p class="vazio" id="mensagemVazia">
+          Nenhum produto encontrado.
+        </p>
+      </div>
+    </section>
+
+    <aside class="aviso">
+      Este site é uma página independente de divulgação de ofertas e não
+      representa o Mercado Livre. Preços e disponibilidade podem mudar.
+      Substitua os links "#" pelos seus links de produtos ou de afiliado.
+    </aside>
+  </main>
+
+  <footer id="contato">
+    <div class="container">
+      <p>© 2026 AchadinhosMercado.Livre</p>
+      <p>Ofertas selecionadas para ajudar você a economizar.</p>
+    </div>
+  </footer>
+
+  <script>
+    const formBusca = document.querySelector("#formBusca");
+    const campoBusca = document.querySelector("#campoBusca");
+    const produtos = document.querySelectorAll(".produto");
+    const mensagemVazia = document.querySelector("#mensagemVazia");
+
+    formBusca.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const termo = campoBusca.value
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+      let encontrados = 0;
+
+      produtos.forEach(function (produto) {
+        const nome = produto.dataset.nome
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+
+        const corresponde = nome.includes(termo);
+        produto.style.display = corresponde ? "flex" : "none";
+
+        if (corresponde) encontrados++;
+      });
+
+      mensagemVazia.style.display = encontrados === 0 ? "block" : "none";
+      document.querySelector("#ofertas").scrollIntoView();
+    });
+  </script>
+</body>
+</html>
